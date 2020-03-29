@@ -1,0 +1,140 @@
+\documentclass[12pt, A4]{article}
+\usepackage[top=1in,left=1in,bottom=1in,right=1in]{geometry}
+
+
+%Packages
+\usepackage{sectsty}
+\usepackage[hyphens]{url}
+\usepackage[breaklinks]{hyperref}
+\usepackage{amsmath, amssymb, amsthm, amsbsy, amsfonts, cases}
+\usepackage{graphicx, comment, enumitem}
+\usepackage{algorithm, algcompatible}
+\usepackage[noend]{algpseudocode}
+\sectionfont{\fontsize{14}{14}\selectfont}
+\subsectionfont{\fontsize{12}{12}\selectfont}
+\usepackage{bigints}
+\usepackage[mathscr]{euscript}
+\usepackage[makeroom]{cancel}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{subcaption}
+\usepackage{enumerate, verbatim}
+\usepackage[font={small,it,singlespacing}]{caption}
+\usepackage{lscape}
+%\usepackage[nodisplayskipstretch]{setspace}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage[sort]{natbib}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{lscape}
+\usepackage{rotating}
+\usepackage{epstopdf}
+\usepackage[compact]{titlesec}
+
+\usepackage{color, colortbl, setspace}
+\definecolor{Gray}{gray}{0.9}
+
+\usepackage{boldline}
+%Margins
+% \setlength{\topmargin}{-0.5in}
+% \setlength{\textheight}{9in}
+% \setlength{\oddsidemargin}{-0.3in}
+% \setlength{\textwidth}{7.2in}
+\hypersetup{colorlinks,citecolor=blue}
+\setlength{\parindent}{.3in}
+\graphicspath{{./images//}}
+
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+%\setlength{\abovedisplayshortskip}{-6pt}
+%\setlength{\belowdisplayshortskip}{-6pt}
+\setlength{\belowcaptionskip}{-3pt}
+
+\renewcommand*{\thefootnote}{\arabic{footnote}}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\R}{\mathcal{R}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\z}{\mathbf{z}}
+\newcommand{\w}{\mathbf{w}}
+\newcommand{\s}{\mathbf{s}}
+\newcommand{\e}{\mathbf{e}}
+\newcommand{\vv}{\mathbf{v}}
+\newcommand{\Lap}{\mathcal{LAP}}
+\newcommand{\Exp}{\mathcal{EXP}}
+\newcommand{\E}{\mbox{E}}
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+%\theoremstyle{definition}
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}%[section]
+%\newtheorem{defn}{Definition}[section]
+\newtheoremstyle{exampstyle}
+  {6pt} % Space above
+  {\topsep} % Space below
+  {} % Body font
+  {} % Indent amount
+  {\bfseries} % Theorem head font
+  {.} % Punctuation after theorem head
+  {.5em} % Space after theorem head
+  {} % Theorem head spec (can be left empty, meaning `normal')
+\theoremstyle{exampstyle}\newtheorem{defn}{Definition}
+\theoremstyle{exampstyle}\newtheorem{lem}{Lemma}
+\theoremstyle{exampstyle}\newtheorem{cor}{Corollary}
+\theoremstyle{exampstyle}\newtheorem{pro}{Proposition}
+\theoremstyle{exampstyle}\newtheorem{cla}{Claim}
+\theoremstyle{exampstyle}\newtheorem{rem}{Remark}
+
+\newcommand{\beginsupplement}{%
+        \setcounter{table}{0}
+        \renewcommand{\thetable}{S\arabic{table}}%
+        \setcounter{figure}{0}
+        \renewcommand{\thefigure}{S\arabic{figure}}%
+}
+
+\setlength{\parskip}{6pt}
+\setlength\parindent{0pt}
+\titlespacing*{\section}{0pt}{3pt}{3pt}
+\titlespacing*{\subsection}{0pt}{3pt}{3pt}
+
+\begin{document}
+\title{\large{\textbf{Differentially Private Data Release via\\ Statistical Election to Partition Sequentially}}}
+\author{\small{\textbf{Claire McKay Bowen, Fang Liu, Bingyue Su}}
+\footnote{\noindent Claire McKay Bowen is the Lead Data Scientist for Privacy and Data Security at the Urban Institute. Fang Liu is an Associate Professor and Bingyue Su is a doctoral student in the Department of Applied and Computational Mathematics and Statistics, University of Notre Dame, Notre Dame, IN 46556. Claire McKay Bowen was supported by the National Science Foundation (NSF) Graduate Research Fellowship under Grant No. DGE-1313583 during part of the development of this paper. Fang Liu was supported by the NSF Grants  \#1546373, \#1717417, and the University of Notre Dame Faculty Research Support Initiation Grant Program. Bingyue Su is supported by the NSF Grant \#1717417.} 
+\vspace{-3.5cm}
+}
+\date{}
+\maketitle{}
+
+% \vspace{-1cm}
+% \begin{center}
+%  \small{Claire McKay Bowen\\
+%               Corresponding Author\\
+%               Urban Institute\\
+%               500 L'Enfant Plaza\\
+%               Washington, D.C., US\\
+%               email:cbowen@urban.org\\
+% \vspace{5pt}
+% Fang Liu and Bingyue Su\\
+%               University of Notre Dame\\
+%               Applied and Computational Mathematics and Statistics\\
+%               102G Crowley Hall\\
+%               Notre Dame, IN, US}    
+% \end{center}
+
+
+\begin{abstract}
+\noindent Differential Privacy (DP) formalizes privacy in rigorous and mathematical terms as well as provides a robust concept for privacy protection. DIfferentially Private Data Synthesis (DIPS) techniques produce and release synthetic individual-level data based on the DP framework. However, statistical utility of the synthetic data via DIPS can be low due to the potentially large amount of noise injected to satisfy DP, especially in high-dimensional data. We propose a new DIPS approach, STatistical Election to Partition Sequentially (STEPS), that partitions data by attributes according to their importance ranks per either a practical importance or statistical importance measure. The higher the rank is for an attribute, the better the original information is preserved for that attribute in the synthetic data, and the more useful the synthetic data are expected to be, overall. We develop a general-utility metric to assess the similarity of the synthetic data to the actual data. We applied the STEPS procedure to both simulated data and the 2000-2012 Current Population Survey youth voter data. The results suggest STEPS can preserve better the population-level information and the original information for some analyses compared to the PrivBayes, a modified Uniform histogram approach, and the flat Laplace sanitizer.\\
+
+\noindent \textit{\textbf{keywords}}:  privacy budget, DIfferentially Private Data Synthesis (DIPS), statistical disclosure limitation, propensity score, universal histogram
+\end{abstract}
+
+\end{document} 
